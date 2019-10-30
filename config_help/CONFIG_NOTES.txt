@@ -1,0 +1,27 @@
+- sudo yum install mod_wsgi
+     ?? NECESSARY ?? - sudo yum install python_devel
+- sudo yum install python2-pip
+- sudo pip install flask
+
+- chmod a+x ~
+- chmod a+x ~/flask_simple
+
+- Added the following lines to /etc/httpd/conf/httpd.conf:
+    <IfModule wsgi_module>
+      WSGIDaemonProcess app
+               # do *NOT* include a trailing slash here, or it will be
+               # a circle of redirects.  Does this also apply if it's
+               # the root path???
+      WSGIScriptAlias /flask_simple "/home/ec2-user/flask_simple/flask_simple.wsgi"
+
+      <Directory "/home/ec2-user/flask_simple/">
+          WSGIProcessGroup app
+          WSGIApplicationGroup %{GLOBAL}
+          Require all granted
+      </Directory>
+    </IfModule>
+
+- sudo systemctl restart httpd
+
+- REMEMBER: Have to restart every time you change the app
+
