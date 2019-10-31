@@ -1,5 +1,4 @@
 - sudo yum install mod_wsgi
-     ?? NECESSARY ?? - sudo yum install python_devel
 - sudo yum install python2-pip
 - sudo pip install flask
 
